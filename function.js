@@ -34,71 +34,64 @@ awards1.onclick = function(){
 }
 
 
-//create a new video game on the server
-function createVideoGame(videoGameName,videoGameCharacter, videoGameAchievment,rating,difficulty){
-    var data = "name=" + encodeURIComponent(videoGameName);
-    data += "&character=" + encodeURIComponent(videoGameCharacter);
-    data += "&achievment=" + encodeURIComponent(videoGameAchievment);
-    data += "&rating=" + encodeURIComponent(rating);
-    data += "&difficulty=" + encodeURIComponent(difficulty);
-    console.log("this is the data I am going to send to the server", data);
+function LoadCreators(){
+    fetch("http://localhost:8080/VGDB/Creators").then(function(response){
+        response.json().then(function(data){
+            creators = data;
+            console.log("creators", creators);
+            var creatorBox = document.querySelector("#creatorBox");
+            creatorBox.innerHTML = "";
+            creators.forEach(function(){
+                var newListItem = document.createElement("li");
 
-    fetch("http://localhost:8080/FavoriteVideoGames",{
-        method: 'POST',
-        body:data,
-        headers:{
-            'Content-Type':'application/x-www-form-urlencoded'
-        }
-    }).then(function(response){
-        loadVideoGames();
-    });
-};
-
-//deletes a video game 
-function deleteVideoGameFromServer(videoGameId){
-    fetch("http://localhost:8080/FavoriteVideoGames/"+videoGameId,{
-        method: "DELETE"
-    }).then(function(response){
-        if(response.status == 200){
-            console.log("the video game was successfully deleted");
-            loadVideoGames();
-        }
+                var nameDiv = document.createElement("div");
+                var ageDiv = document.createElement("div");
+                var degreeDiv = document.createElement("div");
+    
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + videoGame.creatorName;
+                newListItem.appendChild(nameDiv);
+    
+                ageDiv.innerHTML = "<b><u>Age: </u></b>" + videoGame.age;
+                newListItem.appendChild(characterDiv);
+    
+                degreeDiv.innerHTML = "<b><u>Degree: </u></b>" + videoGame.degree;
+                newListItem.appendChild(achievmentDiv);
+    
+                creatorBox.appendChild(newListItem);
+            });
+        });
     });
 }
 
-//edits a member
-function editVideoGameFromServer(videoGameId,name,character,achievment,rating,difficulty){
-    var data = "id="+ encodeURIComponent(videoGameId);
-    data += "&name=" + encodeURIComponent(name);
-    data += "&character=" + encodeURIComponent(character);
-    data += "&achievment=" + encodeURIComponent(achievment);
-    data += "&rating=" + encodeURIComponent(rating);
-    data += "&difficulty=" + encodeURIComponent(difficulty);
-    console.log(data);
-    fetch("http://localhost:8080/FavoriteVideoGames/"+videoGameId,{
-        method: "PUT",
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: data
-    }).then(function(response){
-        if(response.status == 200){
-            console.log("the video game was successfully edited");
-            loadVideoGames();
-        }
+function LoadGmaes(){
+    fetch("http://localhost:8080/VGDB/Games").then(function(response){
+        response.json().then(function(data){
+            games = data;
+            console.log("creators", games);
+            var gameBox = document.querySelector("#gameBox");
+            gameBox.innerHTML = "";
+            creators.forEach(function(){
+                var newListItem = document.createElement("li");
+
+                var nameDiv = document.createElement("div");
+                var ageDiv = document.createElement("div");
+                var degreeDiv = document.createElement("div");
+    
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + videoGame.creatorName;
+                newListItem.appendChild(nameDiv);
+    
+                ageDiv.innerHTML = "<b><u>Age: </u></b>" + videoGame.age;
+                newListItem.appendChild(characterDiv);
+    
+                degreeDiv.innerHTML = "<b><u>Degree: </u></b>" + videoGame.degree;
+                newListItem.appendChild(achievmentDiv);
+    
+                creatorBox.appendChild(newListItem);
+            });
+        });
     });
 }
 
-//used for editing
-function displayEditForm(videoGame){
-    document.getElementById("edit-title").hidden = false;
-    document.getElementById("submit").hidden = true;
-    document.getElementById("edit-submit").hidden = false;
-
-    videoGameInput.value = videoGame.name;
-    characterInput.value = videoGame.character;
-    achievmentInput.value = videoGame.achievement;
-    ratingInput.value = videoGame.rating;
-    difficultyInput.value = videoGame.difficulty;
-};
 
 //load videoGames from a server as JSON data
 function loadVideoGames(){

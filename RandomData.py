@@ -33,7 +33,7 @@ subGameNames = ['Evo','Cloud','Dragon','Fuse','Dread','Mad','Geo','Air','War','B
 foreGameNames = ['gene','lust','rain','shot','hunt','core','shock','dude','works',
                  'fire','flight','land','mind','back','storm','dude','craft','rush'
                  'doom','reign','life','point','phobia','blade','light','side','rage'
-                 'blaze']
+                 'blaze',"rune",'craft']
 awardNames = [
     'Pioneer Award','Lifetime Achievment','Ambassador Award','Game of the Year',
     'Audience Award','Best Audio','Best Design','Best Debut',

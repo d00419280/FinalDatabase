@@ -34,24 +34,6 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         else:
             self.handleNotFound()
 
-    def do_PUT(self):
-        path_parts = self.path.split("/")
-        if len(path_parts) > 2:
-            collection_name = path_parts[1]
-            member_id = path_parts[2]
-        else:
-            collection_name = path_parts[1]
-            member_id = None
-
-        if collection_name == 'FavoriteVideoGames':
-            if member_id == None:
-                self.handleNotFound()
-            else:
-                self.handleUpdateVideoGame(member_id)
-        else:
-            #simple 404 response
-            self.handleNotFound()
-
     def handleNotFound(self):
         self.send_response(404)
         self.send_header("Access-Control-Allow-Origin","*")
@@ -83,7 +65,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(200)
         self.send_header("Access-Control-Allow-Origin","*")
-        self.send_header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE,OPTIONS")
+        self.send_header("Access-Control-Allow-Methods","GET,OPTIONS") #self.send_header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE,OPTIONS")
         self.send_header("Access-Control-Allow-Headers","Content-Type")
         self.end_headers()
 
