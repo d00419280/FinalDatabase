@@ -75,7 +75,7 @@ class Database:
         return self.cursor.fetchall()
     
     def GetCreators1(self): # Creators who are 20-29 who have sold at least 2 games and won at least one award
-        self.cursor.execute("SELECT creators.creatorName as creator, age, awardName as award, games.gameName as game, copiesSold as copies_sold, genre FROM creators JOIN games ON creators.creatorName = games.creatorName JOIN awards ON games.gameName = awards.gameName WHERE age >= 20 and  age <= 29")
+        self.cursor.execute("SELECT creators.creatorName as creator, age, degree, awardName as award, games.gameName as game, copiesSold as copies_sold, genre FROM creators JOIN games ON creators.creatorName = games.creatorName JOIN awards ON games.gameName = awards.gameName WHERE age >= 20 and  age <= 29")
         return self.cursor.fetchall()
 
     def GetAwards1(self): # Awards for the survival genre from creators that do not have a degree
