@@ -26,14 +26,14 @@ creatorLastNames = [
     'Gonzales','Keller','Stoll','Collymore','Adler','Hayes','Ford','Beckett'
 ]
 
-subGameNames = ['Evo','Cloud','Dragon','Fuse','Dread','Mad','Geo','Air','War','Bio'
+subGameNames = ['Evo','Cloud','Dragon','Fuse','Dread','Mad','Geo','Air','War','Bio',
                 'Block','Alpha','Fire','Fusion','Ever','Dead','Dream','Anti',
                 'Ember','Cyber','Castle','Grim','Ultra','Alter','Delta','Battle','Arch',
                 'Omega','Mega',]
 foreGameNames = ['gene','lust','rain','shot','hunt','core','shock','dude','works',
-                 'fire','flight','land','mind','back','storm','dude','craft','rush'
-                 'doom','reign','life','point','phobia','blade','light','side','rage'
-                 'blaze',"rune",'craft']
+                 'fire','flight','land','mind','back','storm','dude','craft','rush',
+                 'doom','reign','life','point','phobia','blade','light','side','rage',
+                 'blaze',"rune"]
 awardNames = [
     'Pioneer Award','Lifetime Achievment','Ambassador Award','Game of the Year',
     'Audience Award','Best Audio','Best Design','Best Debut',

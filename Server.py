@@ -7,18 +7,6 @@ from Database import Database
 
 class MyRequestHandler(BaseHTTPRequestHandler):
 
-    def handleListVideoGames(self):
-        #send status code
-        self.send_response(200)
-        self.send_header("Content-Type","application/json")
-        self.send_header("Access-Control-Allow-Origin","*")
-        self.end_headers()
-
-        #write to "wfile" response body
-        db = Database()
-        allRecords = db.getAllVideoGames()
-        self.wfile.write(bytes(json.dumps(allRecords),"utf-8"))
-
     def handleListCreators(self):
         #send status code
         self.send_response(200)
@@ -28,6 +16,17 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         #write to "wfile" response body
         db = Database()
         allRecords = db.GetAllCreators()
+        self.wfile.write(bytes(json.dumps(allRecords),"utf-8"))
+
+    def handleListCreators1(self):
+        #send status code
+        self.send_response(200)
+        self.send_header("Content-Type","application/json")
+        self.send_header("Access-Control-Allow-Origin","*")
+        self.end_headers()
+        #write to "wfile" response body
+        db = Database()
+        allRecords = db.GetCreators1()
         self.wfile.write(bytes(json.dumps(allRecords),"utf-8"))
 
     def handleListGames(self):
@@ -41,6 +40,17 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         allRecords = db.GetAllGames()
         self.wfile.write(bytes(json.dumps(allRecords),"utf-8"))
 
+    def handleListGames1(self):
+        #send status code
+        self.send_response(200)
+        self.send_header("Content-Type","application/json")
+        self.send_header("Access-Control-Allow-Origin","*")
+        self.end_headers()
+        #write to "wfile" response body
+        db = Database()
+        allRecords = db.GetGames1()
+        self.wfile.write(bytes(json.dumps(allRecords),"utf-8"))
+
     def handleListAwards(self):
         #send status code
         self.send_response(200)
@@ -50,6 +60,17 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         #write to "wfile" response body
         db = Database()
         allRecords = db.GetAllAwards()
+        self.wfile.write(bytes(json.dumps(allRecords),"utf-8"))
+
+    def handleListAwards1(self):
+        #send status code
+        self.send_response(200)
+        self.send_header("Content-Type","application/json")
+        self.send_header("Access-Control-Allow-Origin","*")
+        self.end_headers()
+        #write to "wfile" response body
+        db = Database()
+        allRecords = db.GetAwards1()
         self.wfile.write(bytes(json.dumps(allRecords),"utf-8"))
 
 
@@ -66,14 +87,18 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             member_id = None
 
         if collection_name == 'VGDB':
-            if member_id == None:
-                self.handleListVideoGames()
-            elif member_id == 'Creators':
+            if member_id == 'Creators':
                 self.handleListCreators()
             elif member_id == 'Games':
                 self.handleListGames()
             elif member_id == 'Awards':
                 self.handleListAwards()
+            elif member_id == 'Creators1':
+                self.handleListCreators1()
+            elif member_id == 'Games1':
+                self.handleListGames1()
+            elif member_id == 'Awards1':
+                self.handleListAwards1()
         else:
             #simple 404 response
             self.handleNotFound()

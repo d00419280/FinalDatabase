@@ -14,23 +14,27 @@ var awards1 = document.getElementById("awards1");
 //used for video game edits
 allCreatorB.onclick = function(){
     document.getElementById("creatorSentence").innerHTML = "All Creators";
-    //Call the web function like
-    // editVideoGameFromServer(idValue,videoGameInput.value,characterInput.value,achievmentInput.value,ratingInput.value,difficultyInput.value);
+    LoadCreators();
 }
 allGameB.onclick = function(){
     document.getElementById("gameSentence").innerHTML = "All Games";
+    LoadGames();
 }
 allAwardB.onclick = function(){
     document.getElementById("awardSentence").innerHTML = "All Awards";
+    LoadAwards();
 }
 creators1.onclick = function(){
     document.getElementById("creatorSentence").innerHTML = "Creators who are 20-29 and have sold at least 2 games and won at least one award";
+    LoadCreators1();
 }
 games1.onclick = function(){
     document.getElementById("gameSentence").innerHTML = "Games that have a creator with a degree and at least 2 awards";
+    LoadGames1();
 }
 awards1.onclick = function(){
     document.getElementById("awardSentence").innerHTML = "Awards that have been given to the survival genre from creators that don't have a degree";
+    LoadAwards1();
 }
 
 
@@ -41,20 +45,49 @@ function LoadCreators(){
             console.log("creators", creators);
             var creatorBox = document.querySelector("#creatorBox");
             creatorBox.innerHTML = "";
-            creators.forEach(function(){
+            creators.forEach(function(creator){
                 var newListItem = document.createElement("li");
 
                 var nameDiv = document.createElement("div");
                 var ageDiv = document.createElement("div");
                 var degreeDiv = document.createElement("div");
     
-                nameDiv.innerHTML = "<b><u>Name: </u></b>" + creators.creatorName;
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + creator[0];
                 newListItem.appendChild(nameDiv);
     
-                ageDiv.innerHTML = "<b><u>Age: </u></b>" + creators.age;
+                ageDiv.innerHTML = "<b><u>Age: </u></b>" + creator[1];
                 newListItem.appendChild(ageDiv);
     
-                degreeDiv.innerHTML = "<b><u>Degree: </u></b>" + creators.degree;
+                degreeDiv.innerHTML = "<b><u>Degree: </u></b>" + creator[2];
+                newListItem.appendChild(degreeDiv);
+    
+                creatorBox.appendChild(newListItem);
+            });
+        });
+    });
+}
+
+function LoadCreators1(){
+    fetch("http://localhost:8080/VGDB/Creators1").then(function(response){
+        response.json().then(function(data){
+            creators = data;
+            console.log("creators", creators);
+            var creatorBox = document.querySelector("#creatorBox");
+            creatorBox.innerHTML = "";
+            creators.forEach(function(creator){
+                var newListItem = document.createElement("li");
+
+                var nameDiv = document.createElement("div");
+                var ageDiv = document.createElement("div");
+                var degreeDiv = document.createElement("div");
+    
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + creator[0];
+                newListItem.appendChild(nameDiv);
+    
+                ageDiv.innerHTML = "<b><u>Age: </u></b>" + creator[1];
+                newListItem.appendChild(ageDiv);
+    
+                degreeDiv.innerHTML = "<b><u>Award: </u></b>" + creator[2];
                 newListItem.appendChild(degreeDiv);
     
                 creatorBox.appendChild(newListItem);
@@ -70,7 +103,7 @@ function LoadGames(){
             console.log("Games", games);
             var gameBox = document.querySelector("#gameBox");
             gameBox.innerHTML = "";
-            games.forEach(function(){
+            games.forEach(function(game){
                 var newListItem = document.createElement("li");
 
                 var nameDiv = document.createElement("div");
@@ -78,16 +111,49 @@ function LoadGames(){
                 var copiesSoldDiv = document.createElement("div");
                 var genreDiv = document.createElement("div");
     
-                nameDiv.innerHTML = "<b><u>Name: </u></b>" + games.gameName;
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + game[0];
                 newListItem.appendChild(nameDiv);
     
-                creatorNameDiv.innerHTML = "<b><u>Creator Name: </u></b>" + games.CreatorName;
+                creatorNameDiv.innerHTML = "<b><u>Creator Name: </u></b>" + game[1];
                 newListItem.appendChild(creatorNameDiv);
     
-                copiesSoldDiv.innerHTML = "<b><u>Degree: </u></b>" + games.copiesSold;
+                copiesSoldDiv.innerHTML = "<b><u>Copies Sold: </u></b>" + game[2];
                 newListItem.appendChild(copiesSoldDiv);
 
-                genreDiv.innerHTML = "<b><u>Degree: </u></b>" + games.genre;
+                genreDiv.innerHTML = "<b><u>Genre: </u></b>" + game[3];
+                newListItem.appendChild(genreDiv);
+    
+                gameBox.appendChild(newListItem);
+            });
+        });
+    });
+}
+
+function LoadGames1(){
+    fetch("http://localhost:8080/VGDB/Games1").then(function(response){
+        response.json().then(function(data){
+            games = data;
+            console.log("Games", games);
+            var gameBox = document.querySelector("#gameBox");
+            gameBox.innerHTML = "";
+            games.forEach(function(game){
+                var newListItem = document.createElement("li");
+
+                var nameDiv = document.createElement("div");
+                var creatorNameDiv = document.createElement("div");
+                var copiesSoldDiv = document.createElement("div");
+                var genreDiv = document.createElement("div");
+    
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + game[0];
+                newListItem.appendChild(nameDiv);
+    
+                creatorNameDiv.innerHTML = "<b><u>Creator Name: </u></b>" + game[1];
+                newListItem.appendChild(creatorNameDiv);
+    
+                copiesSoldDiv.innerHTML = "<b><u>Copies Sold: </u></b>" + game[2];
+                newListItem.appendChild(copiesSoldDiv);
+
+                genreDiv.innerHTML = "<b><u>Genre: </u></b>" + game[3];
                 newListItem.appendChild(genreDiv);
     
                 gameBox.appendChild(newListItem);
@@ -103,17 +169,42 @@ function LoadAwards(){
             console.log("Awards", awards);
             var awardBox = document.querySelector("#awardBox");
             awardBox.innerHTML = "";
-            awards.forEach(function(){
+            awards.forEach(function(award){
                 var newListItem = document.createElement("li");
 
                 var nameDiv = document.createElement("div");
-                var creatorNameDiv = document.createElement("div");
+                var gameNameDiv = document.createElement("div");
     
-                nameDiv.innerHTML = "<b><u>Name: </u></b>" + awards.awardName;
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + award[0];
                 newListItem.appendChild(nameDiv);
     
-                creatorNameDiv.innerHTML = "<b><u>Creator Name: </u></b>" + awards.gameName;
-                newListItem.appendChild(creatorNameDiv);
+                gameNameDiv.innerHTML = "<b><u>Game Name: </u></b>" + award[1];
+                newListItem.appendChild(gameNameDiv);
+    
+                awardBox.appendChild(newListItem);
+            });
+        });
+    });
+}
+
+function LoadAwards1(){
+    fetch("http://localhost:8080/VGDB/Awards1").then(function(response){
+        response.json().then(function(data){
+            awards = data;
+            console.log("Awards", awards);
+            var awardBox = document.querySelector("#awardBox");
+            awardBox.innerHTML = "";
+            awards.forEach(function(award){
+                var newListItem = document.createElement("li");
+
+                var nameDiv = document.createElement("div");
+                var gameNameDiv = document.createElement("div");
+    
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + award[0];
+                newListItem.appendChild(nameDiv);
+    
+                gameNameDiv.innerHTML = "<b><u>Game Name: </u></b>" + award[1];
+                newListItem.appendChild(gameNameDiv);
     
                 awardBox.appendChild(newListItem);
             });
@@ -161,4 +252,7 @@ function loadVideoGames(){
     });
 };
 
-loadVideoGames();
+l//oadVideoGames();
+//Call loading at the bottom
+
+//Fix the Degree numbers
