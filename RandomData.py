@@ -54,7 +54,7 @@ def GenerateAge():
 def GenerateCreatorName():
     return random.choice(creatorNames) + ' ' + random.choice(creatorLastNames)
 def GenerateGameName():
-    return random.choice(subGameNames + foreGameNames)
+    return random.choice(subGameNames) + random.choice(foreGameNames)
 def GenerateAwardName():
     return random.choice(awardNames)
 def GenerateGenre():
