@@ -8,10 +8,19 @@ class Database:
         self.cursor = self.connection.cursor()
 
     def CreateTables(self):
-        self.cursor.execute("CREATE TABLE creators(creatorName, age,degree)")
-        self.cursor.execute("CREATE TABLE games(gameName, creatorName, copiesSold,genre)")
-        self.cursor.execute("CREATE TABLE awards(awardName, gameName)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS creators(creatorName TEXT, age INTEGER,degree TEXT)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS games(gameName TEXT, creatorName TEXT, copiesSold INTEGER,genre TEXT)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS awards(awardName TEXT, gameName TEXT)")
+        print("Successfully Created Tables")
         self.connection.commit()
+
+    def AnnihilateTables(self):
+        self.cursor.execute("DROP TABLE creators")
+        self.cursor.execute("DROP TABLE games")
+        self.cursor.execute("DROP TABLE awards")
+        print("Successfully Dropped Tables")
+        self.connection.commit()
+
 
     def CreateManyCreators(self,numCreators):
         for i in range(numCreators):
@@ -25,6 +34,7 @@ class Database:
             genre = RandomData.GenerateGenre()
             res = self.cursor.execute("INSERT INTO games (gameName, CreatorName, copiesSold, genre)VALUES(?, ?, ?, ?)", (gameName, name,copiesSold,genre))
             self.connection.commit()
+        print(f"Succesfully Created {numCreators} Creators")
 
     def CreateGames(self,numGames):
         res = self.cursor.execute("SELECT * FROM creators")
@@ -38,6 +48,7 @@ class Database:
             VALUES(?, ?, ?, ?)", (gameName, creator[0], copiesSold, genre))
     
             self.connection.commit()
+        print(f"Succesfully Created {numGames} Games")
 
     def CreateAwards(self,numAwards):
         res = self.cursor.execute("SELECT * FROM games")
@@ -49,6 +60,7 @@ class Database:
             VALUES(?, ?)", (awardName,game[0]))
     
             self.connection.commit()
+        print(f"Succesfully Created {numAwards} Awards")
 
     def GetAllCreators(self):
         self.cursor.execute("SELECT * FROM creators")
@@ -72,3 +84,10 @@ class Database:
 
     def GetGames1(self): #Games with a creator who has a degree and at least 2 awards
         pass
+
+db = Database()
+db.AnnihilateTables()
+db.CreateTables()
+db.CreateManyCreators(10)
+db.CreateGames(20)
+db.CreateAwards(4)
