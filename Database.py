@@ -83,7 +83,7 @@ class Database:
         return self.cursor.fetchall()
 
     def GetGames1(self): #Games with a creator who has a degree and at least 2 awards
-        self.cursor.execute("SELECT creators.creatorName as creator, games.gameName AS game, Count(*) as awards_given FROM awards JOIN games ON awards.gameName = games.gameName JOIN creators ON games.creatorName = creators.creatorName WHERE degree = 1 GROUP BY creators.creatorName HAVING awards_given > 1 ORDER BY awards_given DESC")
+        self.cursor.execute("SELECT creators.creatorName as creator, games.gameName AS game, Count(*) as awards_given, copiesSold, genre FROM awards JOIN games ON awards.gameName = games.gameName JOIN creators ON games.creatorName = creators.creatorName WHERE degree = 1 GROUP BY creators.creatorName HAVING awards_given > 1 ORDER BY awards_given DESC")
         return self.cursor.fetchall()
 
 db = Database()
