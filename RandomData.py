@@ -29,11 +29,12 @@ creatorLastNames = [
 subGameNames = ['Evo','Cloud','Dragon','Fuse','Dread','Mad','Geo','Air','War','Bio',
                 'Block','Alpha','Fire','Fusion','Ever','Dead','Dream','Anti',
                 'Ember','Cyber','Castle','Grim','Ultra','Alter','Delta','Battle','Arch',
-                'Omega','Mega',]
+                'Omega','Mega','Thunder','Carnage']
 foreGameNames = ['gene','lust','rain','shot','hunt','core','shock','dude','works',
                  'fire','flight','land','mind','back','storm','dude','craft','rush',
                  'doom','reign','life','point','phobia','blade','light','side','rage',
-                 'blaze',"rune"]
+                 'blaze',"rune",'tales','base','Guardians','Legacy','Premonition',
+                 'Unleashed','Haven','Shack',"Heroes"]
 awardNames = [
     'Pioneer Award','Lifetime Achievment','Ambassador Award','Game of the Year',
     'Audience Award','Best Audio','Best Design','Best Debut',

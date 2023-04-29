@@ -87,7 +87,7 @@ function LoadCreators1(){
                 ageDiv.innerHTML = "<b><u>Age: </u></b>" + creator[1];
                 newListItem.appendChild(ageDiv);
     
-                degreeDiv.innerHTML = "<b><u>Award: </u></b>" + creator[2];
+                degreeDiv.innerHTML = "<b><u>Degree: </u></b>" + creator[2];
                 newListItem.appendChild(degreeDiv);
     
                 creatorBox.appendChild(newListItem);
@@ -144,16 +144,16 @@ function LoadGames1(){
                 var copiesSoldDiv = document.createElement("div");
                 var genreDiv = document.createElement("div");
     
-                nameDiv.innerHTML = "<b><u>Name: </u></b>" + game[0];
+                nameDiv.innerHTML = "<b><u>Name: </u></b>" + game[1];
                 newListItem.appendChild(nameDiv);
     
-                creatorNameDiv.innerHTML = "<b><u>Creator Name: </u></b>" + game[1];
+                creatorNameDiv.innerHTML = "<b><u>Creator Name: </u></b>" + game[0];
                 newListItem.appendChild(creatorNameDiv);
     
-                copiesSoldDiv.innerHTML = "<b><u>Copies Sold: </u></b>" + game[2];
+                copiesSoldDiv.innerHTML = "<b><u>Copies Sold: </u></b>" + game[3];
                 newListItem.appendChild(copiesSoldDiv);
 
-                genreDiv.innerHTML = "<b><u>Genre: </u></b>" + game[3];
+                genreDiv.innerHTML = "<b><u>Genre: </u></b>" + game[4];
                 newListItem.appendChild(genreDiv);
     
                 gameBox.appendChild(newListItem);
