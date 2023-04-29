@@ -79,15 +79,17 @@ class Database:
         return self.cursor.fetchall()
 
     def GetAwards1(self): # Awards for the survival genre from creators that do not have a degree
-        pass
+        self.cursor.execute("SELECT awardName, games.gameName, genre, creators.creatorName FROM awards JOIN games ON awards.gameName = games.gameName JOIN creators ON games.creatorName = creators.creatorName WHERE degree = 0 AND genre = 'Survival'")
+        return self.cursor.fetchall()
 
     def GetGames1(self): #Games with a creator who has a degree and at least 2 awards
-        pass
+        self.cursor.execute("SELECT creators.creatorName as creator, games.gameName AS game, Count(*) as awards_given FROM awards JOIN games ON awards.gameName = games.gameName JOIN creators ON games.creatorName = creators.creatorName WHERE degree = 1 GROUP BY creators.creatorName HAVING awards_given > 1 ORDER BY awards_given DESC")
+        return self.cursor.fetchall()
 
 db = Database()
 db.AnnihilateTables()
 db.CreateTables()
-db.CreateManyCreators(20)
-db.CreateGames(40)
-db.CreateAwards(5)
-print(db.GetCreators1())
+db.CreateManyCreators(100)
+db.CreateGames(200)
+db.CreateAwards(20)
+print(db.GetGames1())
